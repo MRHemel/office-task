@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .slider-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .slider-button {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+        }
+
+        #prevBtn {
+            left: 10px;
+        }
+
+        #nextBtn {
+            right: 10px;
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.3s ease;
+        }
+
+        .slide {
+            min-width: 50%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            background-color: #fff;
+        }
+
+        .slide img {
+            max-width: 45%;
+            height: auto;
+            margin: 0 5px;
+        }
+    </style>
+    <title>Card Slider</title>
+</head>
+<body>
+    <div class="slider-container">
+        <button id="prevBtn" class="slider-button">&#10094;</button>
+        <div class="slider">
+            <div class="slide">
+                <div class="card">
+                    <h2>Card 1</h2>
+                    <p>This is the content of Card 1.</p>
+                </div>
+                <div class="card">
+                    <h2>Card 2</h2>
+                    <p>This is the content of Card 2.</p>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="card">
+                    <h2>Card 3</h2>
+                    <p>This is the content of Card 3.</p>
+                </div>
+                <div class="card">
+                    <h2>Card 4</h2>
+                    <p>This is the content of Card 4.</p>
+                </div>
+            </div>
+        </div>
+        <button id="nextBtn" class="slider-button">&#10095;</button>
+    </div>
+    <script>
+        const slider = document.querySelector('.slider');
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentIndex = 0;
+
+        function showSlide(index) {
+            if (index < 0) {
+                currentIndex = slides.length - 1;
+            } else if (index >= slides.length) {
+                currentIndex = 0;
+            }
+            slider.style.transform = `translateX(-${currentIndex * 50}%)`;
+        }
+
+        prevBtn.addEventListener('click', () => {
+            currentIndex--;
+            showSlide(currentIndex);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex++;
+            showSlide(currentIndex);
+        });
+
+        // Initialize slider
+        showSlide(currentIndex);
+    </script>
+</body>
+</html>
